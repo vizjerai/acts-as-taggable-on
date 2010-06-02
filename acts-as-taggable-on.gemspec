@@ -25,7 +25,6 @@ Gem::Specification.new do |s|
      "generators/acts_as_taggable_on_migration/acts_as_taggable_on_migration_generator.rb",
      "generators/acts_as_taggable_on_migration/templates/migration.rb",
      "lib/acts-as-taggable-on.rb",
-     "lib/acts_as_taggable_on/acts_as_taggable_on.rb",
      "lib/acts_as_taggable_on/acts_as_taggable_on/cache.rb",
      "lib/acts_as_taggable_on/acts_as_taggable_on/collection.rb",
      "lib/acts_as_taggable_on/acts_as_taggable_on/core.rb",
@@ -37,6 +36,7 @@ Gem::Specification.new do |s|
      "lib/acts_as_taggable_on/compatibility/postgresql.rb",
      "lib/acts_as_taggable_on/tag.rb",
      "lib/acts_as_taggable_on/tag_list.rb",
+     "lib/acts_as_taggable_on/taggable.rb",
      "lib/acts_as_taggable_on/tagging.rb",
      "lib/acts_as_taggable_on/tags_helper.rb",
      "lib/generators/acts_as_taggable_on/migration/migration_generator.rb",
@@ -60,7 +60,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/mbleigh/acts-as-taggable-on}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.6}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{ActsAsTaggableOn is a tagging plugin for Rails that provides multiple tagging contexts on a single model.}
   s.test_files = [
     "spec/acts_as_taggable_on/acts_as_taggable_on_spec.rb",
@@ -81,7 +81,7 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
     else
     end
   else
