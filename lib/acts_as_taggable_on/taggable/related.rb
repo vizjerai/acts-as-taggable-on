@@ -48,7 +48,7 @@ module ActsAsTaggableOn::Taggable
                        :from       => "#{klass.table_name}, #{ActsAsTaggableOn::Tag.table_name}, #{ActsAsTaggableOn::Tagging.table_name}",
                        :conditions => ["#{exclude_self} #{klass.table_name}.id = #{ActsAsTaggableOn::Tagging.table_name}.taggable_id AND #{ActsAsTaggableOn::Tagging.table_name}.taggable_type = '#{klass.to_s}' AND #{ActsAsTaggableOn::Tagging.table_name}.tag_id = #{ActsAsTaggableOn::Tag.table_name}.id AND #{ActsAsTaggableOn::Tag.table_name}.name IN (?) AND #{ActsAsTaggableOn::Tagging.table_name}.context = ?", tags_to_find, result_context],
                        :group      => group_columns,
-                       :order      => "count DESC" }.update(options))
+                       :order      => "COUNT(*) DESC" }.update(options))
       end
       
       def related_tags_for(context, klass, options = {})
@@ -62,7 +62,7 @@ group_columns = ActsAsTaggableOn::Tag.using_postgresql? ? grouped_column_names_f
                        :from       => "#{klass.table_name}, #{ActsAsTaggableOn::Tag.table_name}, #{ActsAsTaggableOn::Tagging.table_name}",
                        :conditions => ["#{exclude_self} #{klass.table_name}.id = #{ActsAsTaggableOn::Tagging.table_name}.taggable_id AND #{ActsAsTaggableOn::Tagging.table_name}.taggable_type = '#{klass.to_s}' AND #{ActsAsTaggableOn::Tagging.table_name}.tag_id = #{ActsAsTaggableOn::Tag.table_name}.id AND #{ActsAsTaggableOn::Tag.table_name}.name IN (?)", tags_to_find],
                        :group      => group_columns,
-                       :order      => "count DESC" }.update(options))
+                       :order      => "COUNT(*) DESC" }.update(options))
       end
     end
   end
