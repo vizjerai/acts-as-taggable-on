@@ -1,5 +1,4 @@
 require "active_record"
-require "action_view"
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
