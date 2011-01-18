@@ -1,4 +1,4 @@
-source :gemcutter
+source :rubygems
 
 # Rails 2.3
 gem 'rails',        '~> 2.3.5'
