@@ -68,7 +68,7 @@ module ActsAsTaggableOn::Taggable
       def tagged_with(tags, options = {})
         tag_list = ActsAsTaggableOn::TagList.from(tags)
 
-        return [] if tag_list.empty?
+        return scoped(:conditions => "1 = 0") if tag_list.empty?
 
         joins = []
         conditions = []
