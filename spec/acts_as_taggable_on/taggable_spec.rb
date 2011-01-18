@@ -75,6 +75,13 @@ describe "Taggable" do
     TaggableModel.tagged_with("ruby").first.should == @taggable
   end
 
+  it "should be able to find by tag with no tag" do
+    @taggable.skill_list = "ruby, rails, css"
+    @taggable.save
+
+    TaggableModel.tagged_with('').should == []
+  end
+
   it "should be able to find by tag with context" do
     @taggable.skill_list = "ruby, rails, css"
     @taggable.tag_list = "bob, charlie"
