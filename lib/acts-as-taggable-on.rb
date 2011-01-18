@@ -12,7 +12,7 @@ require "acts_as_taggable_on/taggable/cache"
 require "acts_as_taggable_on/taggable/ownership"
 require "acts_as_taggable_on/taggable/related"
 
-require "acts_as_taggable_on/acts_as_tagger"
+require "acts_as_taggable_on/tagger"
 require "acts_as_taggable_on/tag"
 require "acts_as_taggable_on/tag_list"
 require "acts_as_taggable_on/tags_helper"
