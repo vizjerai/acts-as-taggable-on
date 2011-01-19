@@ -1,44 +1,45 @@
-begin
-  # Rspec 1.3.x
-  require 'spec/rake/spectask'
+# Rspec 2.4.x
+desc 'Default: run specs'
+task :spec do
+  begin
+    require 'rspec/core/rake_task'
 
-  desc 'Default: run specs'
-  task :default => :spec
-  Spec::Rake::SpecTask.new do |t|
-    t.spec_files = FileList["spec/**/*_spec.rb"]
-  end
+    RSpec::Core::RakeTask.new do |t|
+      t.pattern = "spec/**/*_spec.rb"
+    end
 
-  Spec::Rake::SpecTask.new('rcov') do |t|
-    t.spec_files = FileList["spec/**/*_spec.rb"]
-    t.rcov = true
-    t.rcov_opts = ['--exclude', 'spec']
+    RSpec::Core::RakeTask.new('rcov') do |t|
+      t.pattern = "spec/**/*_spec.rb"
+      t.rcov = true
+      t.rcov_opts = ['--exclude', 'spec']
+    end
+    Rake::Task['spec'].invoke
+  rescue LoadError
+    puts "RSpec not available. Install it with: gem install rspec"
   end
-  
-rescue LoadError
-  # Rspec 2.4.x
-  require 'rspec/core/rake_task'
-
-  desc 'Default: run specs'
-  task :default => :spec  
-  RSpec::Core::RakeTask.new do |t|
-    t.pattern = "spec/**/*_spec.rb"
-  end
-  
-  RSpec::Core::RakeTask.new('rcov') do |t|
-    t.pattern = "spec/**/*_spec.rb"
-    t.rcov = true
-    t.rcov_opts = ['--exclude', 'spec']
-  end
-
-rescue LoadError
-  puts "RSpec not available. Install it with: gem install rspec"
 end
 
 namespace 'rails2.3' do
+  # Rspec 1.3.x
   task :spec do
     gemfile = File.join(File.dirname(__FILE__), 'lib', 'acts_as_taggable_on', 'compatibility', 'Gemfile')
     ENV['BUNDLE_GEMFILE'] = gemfile
-    Rake::Task['spec'].invoke    
+    begin
+      require 'spec/rake/spectask'
+
+      Spec::Rake::SpecTask.new do |t|
+        t.spec_files = FileList["spec/**/*_spec.rb"]
+      end
+
+      Spec::Rake::SpecTask.new('rcov') do |t|
+        t.spec_files = FileList["spec/**/*_spec.rb"]
+        t.rcov = true
+        t.rcov_opts = ['--exclude', 'spec']
+      end
+      Rake::Task['spec'].invoke
+    rescue LoadError
+      puts "RSpec not available. Install it with: gem install rspec"
+    end
   end
 end
 
